@@ -29,9 +29,9 @@ def preview_data(train):
     correlation_matrix = train.corr().round(2)
     sns.heatmap(correlation_matrix, annot=True)
     plt.show()
-    # for i in range(train.shape[1] - 2):
-    #     sns.lmplot(data=train, x=train.columns[i + 1], y="medv")  # +1 to skip ID and get second to last column (last=y)
-    #     plt.show()
+    for i in range(train.shape[1] - 2):
+        sns.lmplot(data=train, x=train.columns[i + 1], y="medv")  # +1 to skip ID and get second to last column (last=y)
+        plt.show()
 
 def train_linear_regression_model(train_X, train_y):
     return LinearRegression().fit(train_X, train_y)
@@ -52,5 +52,3 @@ if __name__ == '__main__':
     pred = predict(reg, test_X)
     pred = pred.set_index(test.iloc[:, 0], drop=True)
     pred.to_csv(output_path)
-
-    print()
